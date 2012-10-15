@@ -1,0 +1,259 @@
+
+
+*******************************************************************************
+Mon Oct 15 01:43:37 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+	y range restricted to [-2.00000 : 2.00000]
+        #datapoints = 2
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+BREAK:          Number of data points smaller than number of parameters
+
+
+
+*******************************************************************************
+Mon Oct 15 01:44:02 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+	y range restricted to [-2.00000 : 2.00000]
+        #datapoints = 2
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+BREAK:          Number of data points smaller than number of parameters
+
+
+
+*******************************************************************************
+Mon Oct 15 01:46:41 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+	y range restricted to [0.00000 : 8000.00]
+        #datapoints = 8000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 0.851217          delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.00312768
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+c               = 1
+d               = 1
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 0.851213
+rel. change during last iteration : -4.85437e-06
+
+degrees of freedom    (FIT_NDF)                        : 7996
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0103177
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000106455
+
+BREAK:          Singular matrix in Invert_RtR
+
+
+
+*******************************************************************************
+Mon Oct 15 01:53:10 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+	y range restricted to [0.00000 : 8000.00]
+        #datapoints = 8000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 3.84072e+15       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 6.92885e+06
+
+initial set of free parameter values
+
+a               = 0.05
+b               = 0.05
+n               = 3000
+m               = 100
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 0.747356
+rel. change during last iteration : -4.90078e-07
+
+degrees of freedom    (FIT_NDF)                        : 7996
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00966779
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.34663e-05
+
+BREAK:          Singular matrix in Invert_RtR
+
+
+
+*******************************************************************************
+Mon Oct 15 01:54:42 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+        #datapoints = 8000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 0.747356          delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 6.92885e+06
+
+initial set of free parameter values
+
+a               = 0.05
+b               = 2.60009e-10
+n               = 3000
+m               = 100.1
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 0.747356
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 7996
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00966779
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.34663e-05
+
+BREAK:          Singular matrix in Invert_RtR
+
+
+
+*******************************************************************************
+Mon Oct 15 01:57:11 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+        #datapoints = 8000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 0.747356          delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 8.00075e+06
+
+initial set of free parameter values
+
+b               = 2.60009e-10
+n               = 3000
+m               = 100.2
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 0.747356
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 7997
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00966719
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.34546e-05
+
+BREAK:          Singular matrix in Invert_RtR
+
+
+
+*******************************************************************************
+Mon Oct 15 01:57:50 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+        #datapoints = 8000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 0.747356          delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 8.49267e-07
+
+initial set of free parameter values
+
+n               = 3000
+m               = 100.3
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 0.747356
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 7998
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00966659
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.34429e-05
+
+BREAK:          Singular matrix in Invert_RtR
+
+
+
+*******************************************************************************
+Mon Oct 15 01:58:10 2012
+
+
+FIT:    data read from "./numbered" using 1:2
+        format = x:z
+        #datapoints = 8000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 0.793516          delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 8.49267e-07
+
+initial set of free parameter values
+
+n               = 5000
+m               = 100.401
+
+After 2 iterations the fit converged.
+final sum of squares of residuals : 0.747356
+rel. change during last iteration : -2.4124e-10
+
+degrees of freedom    (FIT_NDF)                        : 7998
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.00966659
+variance of residuals (reduced chisquare) = WSSR/ndf   : 9.34429e-05
+
+BREAK:          Singular matrix in Invert_RtR
+
