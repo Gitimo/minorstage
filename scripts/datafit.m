@@ -1,4 +1,4 @@
-clear all; clf;
+clf;
  
 # Function that will be fit
 function [y]=double_exp(x,par)
@@ -9,7 +9,7 @@ end
 j=1.4198e-02;
 t1= 2.6032e+02;
 t2= 4.2686e+02;
-m=load("../data/2012-10-16/flash_middle_light_off_cut");
+m=load("../data/2012-10-22/wo4");
 y=m(:,2);
 x=m(:,1);
 
