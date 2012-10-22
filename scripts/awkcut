@@ -1,0 +1,2 @@
+awk 'NR>7 {print (NR-7)/400000" "$3;}' contacts > cc
+
