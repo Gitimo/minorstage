@@ -6,10 +6,10 @@ function [y]=double_exp(x,par)
 end
  
 # Generate a double exponent
-j=1.4198e-02;
+j=5e-02;
 t1= 2.6032e+02;
 t2= 4.2686e+02;
-m=load("../data/2012-10-22/wo4");
+m=load("../data/2012-11-12/noARC/testing/IV.data");
 y=m(:,2);
 x=m(:,1);
 
