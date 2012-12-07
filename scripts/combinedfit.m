@@ -1,14 +1,14 @@
 clear all; clf;
 
 # Define some physical constants
-k=1.3806488e-23;
-q=1.60217646e-19;
-T=293;
+global k=1.3806488e-23;
+global q=1.60217646e-19;
+global T=293;
 
 # fitting to find idealities and currents
 
 function [y]=n1fit(x,par)
-	k=1.3806488e-23;
+global k;
 	q=1.60217646e-19;
 	T=293;
 	y=q*x/(k*T) +par;
