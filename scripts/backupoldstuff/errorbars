@@ -1,0 +1,12 @@
+for m=1:8000
+	if (m==30)
+		vtcut(m)=vt(m); it2cut(m)=it2(m);
+	elseif (mod(m,100)==0)
+		vtcut(m)=vt(m); it2cut(m)=it2(m);
+	end
+end
+
+#hold on;
+#hg = errorbar(vtcut,log(it2cut),0.0005);
+#set(hg,"marker","+");
+#set(hg,"linestyle","none");
