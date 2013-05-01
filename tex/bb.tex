@@ -1,0 +1,42 @@
+\documentclass[a4paper]{article}
+\usepackage[english]{babel}
+\usepackage[hmargin=3cm,vmargin=4cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{alltt}
+\pagestyle{empty}
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\begin{document}
+We start with Planck's radiation law in its most well-known form:
+\beq
+B_{\lambda} (T) = \int _{\lambda_1} ^{\lambda 2} \frac{2  \,  \pi  \, h  \, c^2}{\lambda ^5} \frac{d\lambda}{\exp(\frac{hc}{\lambda kT})-1} \, ,
+\eeq
+where $h$ is Planck's constant, $c$ the speed of light, $k$ the Boltzmann constant and $T$ the absolute temperature. $B_{\lambda} (T)$ gives the energy density of a black-body at temperature $T$ in terms of the wavelength, but we are more interested in the corresponding flux density: Using
+\beq
+\label{enlam}
+E(\lambda)=\frac{hc}{\lambda}
+\eeq
+the spectral photon density becomes
+\beq
+\label{photlam}
+P_{\lambda} (T) = \int _{\lambda_1} ^{\lambda 2} \frac{2  \,  \pi  \, c}{\lambda ^4} \frac{d\lambda}{\exp(\frac{hc}{\lambda kT})-1} \, .
+\eeq
+The derivative of \eqref{enlam} is:
+\beq
+\frac{dE}{d\lambda}=-\frac{hc}{\lambda^2} \, .
+\eeq
+So:
+\begin{align}
+P_{\lambda} (T) &= \int _{\lambda _1} ^{\lambda _2} \frac{2  \,  \pi  \, c}{\lambda ^4} \frac{d\lambda}{\exp(\frac{hc}{\lambda kT})-1} \\
+P_{E} (T)	&=\int _{E(\lambda _2)} ^{E(\lambda_1)} \frac{2 \, \pi }{h \, \lambda ^2} \frac{dE}{\exp(\frac{hc}{\lambda kT})-1} \\
+		&=\int _{E(\lambda _2)} ^{E(\lambda_1)} \frac{2  \,  \pi}{h^3 \, c^2} \frac{E ^2 \, dE}{\exp(\frac{E}{kT})-1}
+\end{align}
+
+
+
+
+
+\end{document}

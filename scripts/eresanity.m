@@ -6,7 +6,7 @@ h=6.62606957e-34;
 c=299792458;
 Troom=293;
 Tsun=6000;
-am15=load("/home/timo/minorstage/data/am15short");
+am15=load("am15short");
 
 names=cellstr('');
 nofcells=input("How many cells?");
@@ -27,7 +27,8 @@ for m=2:nofcells
 	eqearray(:,m)=data(:,2)*scov(m);
 	Voc(m)=input("This cells Voc?");
 end
-pden=numofphot(wave,am15(:,2));
+pden=am15(:,3)*1000/trapz(am15(:,1),am15(:,3)); # renormalise to 1kW/m^2;
+pden=numofphot(am15(:,1),pden);
 clear data fcell am15 scov;
 
 plot(wave,eqearray)
@@ -60,7 +61,7 @@ lum=zeros(nofcells,size(wave)(1));
 [fid,msg]=fopen(gen_pname(names,'','.txt'),'w');
 fprintf(fid,'cell\tVoc(V)\tVlim(V)\tJ_sc(A/m^2)\tJ_rad(A/m^2)\tQ_led\n')
 for m=1:nofcells
-	J_sc(1,m)=q*trapz(flipud(wavetoen(wave*10^-9)),flipud(pden).*flipud(eqearray(:,m)));
+	J_sc(1,m)=q*trapz(wave,pden.*eqearray(:,m));
 	J_rad(1,m)=q*trapz(flipud(wavetoen(wave*10^-9)),blackbodyE(flipud(wavetoen(wave*10^-9)),F_bb,Troom).*flipud(eqearray(:,m)));
 	Q_led(1,m)=J_rad(m)*exp(q*Voc(m)/(k*Troom))/J_sc(m);
 	Voc_lim(1,m)=k*Troom/q * log(J_sc(1,m) / J_rad(1,m) +1);

@@ -1,0 +1,10 @@
+Run Id		Run Id		Run Id		Run Id		Run Id		Run Id		Run Id		Run Id		
+Device	GaAsR2979C ref	Device	W1703/1 qe	Device	W1703/1 g	Device	W1703/1 A	Device	W1715 qe	Device	W1715 A	Device	W1715 f	Device	GaAsR2979C ref check	
+Curve	Illuminated IV1	Curve	Illuminated IV1	Curve	Illuminated IV1	Curve	Illuminated IV1	Curve	Illuminated IV1	Curve	Illuminated IV1	Curve	Illuminated IV1	Curve	Illuminated IV1	
+Size [cm2]	1	Size [cm2]	1	Size [cm2]	0.25	Size [cm2]	1	Size [cm2]	1	Size [cm2]	1	Size [cm2]	0.25	Size [cm2]	1	
+Temperature [C]	25	Temperature [C]	25	Temperature [C]	25	Temperature [C]	25	Temperature [C]	25	Temperature [C]	25	Temperature [C]	25	Temperature [C]	25	
+Material	None	Material	GaAs	Material	GaAs	Material	GaAs	Material	GaAs	Material	GaAs	Material	GaAs	Material	GaAs	
+Date	3/27/2013	Date	3/27/2013	Date	3/27/2013	Date	3/27/2013	Date	3/27/2013	Date	3/27/2013	Date	3/27/2013	Date	3/27/2013	
+Time	2:56 PM	Time	3:04 PM	Time	3:06 PM	Time	3:08 PM	Time	3:25 PM	Time	3:26 PM	Time	3:28 PM	Time	3:30 PM	
+Temperature Corrected	no	Temperature Corrected	yes	Temperature Corrected	yes	Temperature Corrected	yes	Temperature Corrected	yes	Temperature Corrected	yes	Temperature Corrected	yes	Temperature Corrected	yes	
+Irradiance [W/m2]	979.856485483332	Irradiance [W/m2]	979.856485483332	Irradiance [W/m2]	979.856485483332	Irradiance [W/m2]	979.856485483332	Irradiance [W/m2]	979.856485483332	Irra
