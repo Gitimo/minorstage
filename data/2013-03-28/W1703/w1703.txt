@@ -1,0 +1,2 @@
+cell	Voc(V)	Vlim(V)	J_sc	J_sclim(mA/cm^2)	J_rad(mA/cm^2)	ERE(%)
+w1703	1.035	1.14751	666	28.7691	1.51929e-18	1.2881
