@@ -8,19 +8,19 @@ global Troom=300;
 global Tsun=5777;
 ############## Load spectra ####################################
 load("am15full");
-load("am15short");
+load("am1510nm");
 # Renormalise shortened spec to correct energy-density: 1kW/m^2
 # Do I have to normalise? W/o normalising: J_sc=28mA/cm^2; with: J_sc=42mA/cm^2
 ## As is: normalised to 683.56W/m^2, i.e. int 350 to 920 in am15full
-wave=am15short(:,1); #wavelength in m (useful for plotting, finding, integrating)
+wave=am1510nm(:,1); #wavelength in m (useful for plotting, finding, integrating)
 wavem=wave*10^-9;
 energy=flipud(wavetoen(wavem));
 start=find(am15full==(min(wave)));
 stop=find(am15full==(max(wave)));
 shouldpower=trapz(am15full(start:stop,1),am15full(start:stop,3));
-specpower=am15short(:,3)*shouldpower/trapz(am15short(:,1),am15short(:,3));
+specpower=am1510nm(:,3)*shouldpower/trapz(am1510nm(:,1),am1510nm(:,3));
 
-clear am15full am15short
+clear am15full am1510nm
 specphot= specpower.*wavem/(h*c);
 #specphot=numofphot(wave,specpower)*10^9; # to convert to SI, i.e. photons per m^2 *per m* instead of ...per nm
 ############## Get cell data ###################################
@@ -30,10 +30,12 @@ nofpoints=size(wave)(1);
 eqearray=zeros(nofpoints,nofcells);
 Csize=zeros(1,nofcells);
 Voc=zeros(1,nofcells);
+Jscmeas=zeros(1,nofcells);
 Sco=0;
 for m=1:nofcells
 	names{1,m}=input("Path to cell-eqe Data? ","s");
 	Voc(1,m)=input("Voc? (V)");
+	Jscmeas(1,m)=input("Jsc? (mA/cm^2)");
 	%Sco=input("Surface-Coverage? ");
 	data=dlmread(names{1,m});
 	eqearray(:,m)=data(:,2);%*Sco;
@@ -53,25 +55,23 @@ clf;
 ########################## Now do the real calculations #################
 # Preallocate vectors and matrices for calculated parameters
 J_sc=zeros(1,nofcells);
-J_0_r=zeros(1,nofcells);
-J_0_nr=zeros(1,nofcells);
+J_rad=zeros(1,nofcells);
 Q_led=zeros(1,nofcells);
 Voc_lim=zeros(1,nofcells);
 ERE=zeros(1,nofcells);
 lum=zeros(nofpoints,nofcells);
 # Open txt file for saving parameters
 [fid,msg]=fopen(gen_pname(names,'','.txt'),'w');
-fprintf(fid,'cell\tVoc(V)\tVlim(V)\tJ_sc(mA/cm^2)\tJ_0_r\t\tJ_0_nrERE(%%)\n');
+fprintf(fid,'cell\tVoc(V)\tVlim(V)\tJ_sc\tJ_sclim(mA/cm^2)\tJ_rad(mA/cm^2)\tERE(%%)\n');
 
 for m=1:nofcells
 	J_sc(1,m)=q*trapz(wave,specphot.*eqearray(:,m))/10;
-	J_0_r(1,m)=q*trapz(energy,blackbodyE(energy,Troom).*flipud(eqearray(:,m)))/10;
+	J_rad(1,m)=q*trapz(energy,blackbodyE(energy,Troom).*flipud(eqearray(:,m)))/10;
 	Voc_lim(1,m)=k*Troom/q * log(J_sc(1,m) / J_rad(1,m) +1);
 	lum(:,m)=q*exp(q*Voc(m)/(k*Troom))*blackbodyL(wavem,Troom).*eqearray(:,m); #check units!!! WHAT THE Fuck?!?
 	ERE(1,m)=J_rad(1,m)*exp(q*Voc(m)/(k*Troom))/J_sc(1,m)*100;
-	J_0_nr(1,m)=J_sc(1,m)/(exp(Voc_lim(1,m)*q/(k*Troom))-1)-J_0_r;
 	#dVoc=-k*Troom/q*log(ERE(1,m)/100); can be used as sanity check: Voc+dVoc=Voc_lim -> works!
-	fprintf(fid,'%s\t%.4g\t%g\t%g\t%g\t%g\t%g\n',names{1,m},Voc(m),Voc_lim(1,m),J_sc(1,m),J_0_r(1,m),J_0_nr,ERE(1,m));
+	fprintf(fid,'%s\t%.4g\t%g\t%g\t%g\t%g\t%g\n',names{1,m},Voc(m),Voc_lim(1,m),Jscmeas(1,m),J_sc(1,m),J_rad(1,m),ERE(1,m));
 end
 # Close file, save data
 fclose(fid);

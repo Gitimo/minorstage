@@ -1,0 +1,2 @@
+awk 'BEGIN{FS=",";}  ($1-350) % 3 == 0  {print;}' am15full > am15-3nm
+-> prints specrtal data per 3 nm, starting at 350

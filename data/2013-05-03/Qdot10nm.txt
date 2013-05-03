@@ -1,0 +1,2 @@
+cell	Voc(V)	Vlim(V)	J_sc	J_sclim(mA/cm^2)	J_rad(mA/cm^2)	ERE(%)
+Qdot10nm	0.886	1.04682	666	13.4284	3.48492e-17	0.198754
