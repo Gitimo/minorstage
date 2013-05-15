@@ -53,7 +53,7 @@ for m=1:nofcells
 	res(1,m)=data(2,1)-data(1,1);
 	if res(1,m)==3
 		eqearray_3(:,m)=data(:,2);
-	elseif res==10
+	elseif res(1,m)==10
 		eqearray_10(:,m)=data(:,2);
 	endif
 endfor
