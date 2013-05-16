@@ -1,83 +1,65 @@
-clear all; clf; format long;
-# Define some physical constants
-k=1.3806488e-23;
-q=1.60217646e-19;
-h=6.62606957e-34;
-c=299792458;
-Troom=293;
-Tsun=6000;
+############## Define some physical constants 	##################
+global k=1.3806488e-23;
+global q=1.60217646e-19;
+global h=6.62606957e-34;
+global c=299792458;
+global Troom=300;
+global Tsun=5777;
+############## Defined some physical constants	#################
+
+# utility functions
+function [val,pos]=findclosest(array,target)
+	[val,pos]=min(abs(array-target));
+end
 
 
-names=cellstr('');
+############## Load necessary data		##################
+fspec=load("am15full");
+fspec=fspec(:,[1,3]);
+
 nofcells=input("How many cells?");
-Voc(1:nofcells)=0;
-names{1,1}=input("Path to first data-file?","s");
-Voc(1)=input("First cells Voc?");
-fcell=dlmread(names{1,1});
-npoints=size(fcell)(1);
-wave=fcell(:,1);
-eqearray=zeros(npoints,nofcells);
-eqearray(:,1)=fcell(:,2);
-for m=2:nofcells
-	names{1,m}=input("Path to next file?","s");
-	data=dlmread(names{1,m});
-	eqearray(:,m)=data(:,2);
-	Voc(m)=input("This cells Voc?");
-end
+names=cellstr('');
+#create cell to contain {1,1}=Voc; {2,:}=wavelength (m); 
+#{3,:}=eqe; {4,:}=energy; {5,:}=eqeflipped; {6,:}=numberofphotons
+datacell=cell(6,nofcells);
 
-clear data fcell;
-
-plot(wave,eqearray)
-xlabel "Wavelength (nm)"
-ylabel "External Quantum Efficiency"
-legend(names,"location","south")
-
-print(gen_pname(names,'_eqe','.png'),'-dpng');
-print(gen_pname(names,'_eqe','.eps'),'-deps');
-clf;
-
-longwave=(10:10:920000)*10^(-9); #wavelength-vector in m	
-longeqearray=zeros(size(longwave)(2),nofcells);
-for n=1:nofcells
-	for m=1:npoints
-		longeqearray(wave(m)/10,n)=eqearray(m,n);	#first row of EQE: lambda =350 assigned to 35th
-	end
-end
-
-clear eqearray;
-
-F_sun=2.16e-5*pi;			#geometric factors, angular dependence of bb-law
-F_bb=pi;
-
-J_sc=zeros(1,nofcells);
-J_rad=zeros(1,nofcells);
-Q_led=zeros(1,nofcells);
-Voc_lim=zeros(1,nofcells);
-lum=zeros(size(longwave)(2),nofcells);
-longeqearray=longeqearray';
-[fid,msg]=fopen(gen_pname(names,'','.txt'),'w');
-fprintf(fid,'cell\tVoc(V)\tVlim(V)\tJ_sc(A/m^2)\tJ_rad(A/m^2)\tQ_led\n')
 for m=1:nofcells
-	J_sc(1,m)=q*trapz(longwave,blackbody(longwave,F_sun,Tsun).*longeqearray(m,:));
-	J_rad(1,m)=q*trapz(longwave,blackbody(longwave,F_bb,Troom).*longeqearray(m,:));
-	Q_led(1,m)=J_rad(m)*exp(q*Voc(m)/(k*Troom))/J_sc(m);
-	Voc_lim(1,m)=k*Troom/q * log(J_sc(1,m) / J_rad(1,m) +1);
-	lum(:,m)=exp(q*Voc(m)/(k*Troom))*blackbody(longwave,F_bb,Troom).*longeqearray(m,:);
-	fprintf(fid,'%s\t%.4g\t%g\t%g\t%g\t%g\n',names{1,m},Voc(m),Voc_lim(1,m),J_sc(1,m),J_rad(1,m),Q_led(1,m));
-end
+	names{1,m}=input("Path to cell-eqe Data? ","s");
+	datacell{1,m}=input("Voc? (V) ");
+	data=dlmread(names{1,m});
+	datacell{2,m}=data(:,1)*10^(-9);
+	datacell{3,m}=data(:,2);
+	datacell{4,m}=wavetoen(flipud(datacell{2,m}));		%flipUD or flipLR?
+	datacell{5,m}=flipud(datacell{3,m});
+	datacell{6,m}=interp1(fspec(:,1),fspec(:,2),datacell{2,m}*10^9);
+	[val,start]=findclosest(fspec(:,1),min(datacell{2,m}*10^9));
+	[val,stop]=findclosest(fspec(:,1),max(datacell{2,m}*10^9));
+	should=trapz(fspec(start:stop,1),fspec(start:stop,2));
+	is=trapz(datacell{2,m}*10^9,datacell{6,m});
+	datacell{6,m}=datacell{6,m}*should/is .* datacell{2,m} / (h*c) ;
+	clear data
+endfor
+############## Loaded necessary data		##################
+
+############## do the calculations		##################
+#create cell to contain results: {1,1}=J_sc; 
+#{2,1}=J_0_r; {3,1}=Voc_limit; {4,1}=ERE
+results=cell(4,nofcells);
+
+for m=1:nofcells
+	results{1,m}=q*trapz(datacell{2,m}*10^9,datacell{6,m} .* datacell{3,m}) / 10 ;	
+	results{2,m}=q*trapz(datacell{4,m}, blackbodyE(datacell{4,m},Troom) .* datacell{5,m} ) / 10 ;
+	results{3,m}=k*Troom/q * log( results{1,m}/results{2,m} +1 ) ;
+	results{4,m}=exp( q * datacell{1,m} / (k*Troom) ) * results{2,m} / results{1,m} * 100;
+endfor
+############## done the calculations		##################
+
+
+############## print human readable output	##################
+[fid,msg]=fopen(gen_pname(names,'','.txt'),'w');
+fprintf(fid,'cell\tVoc(V)\tVlim(V)\tJ_sc(mA/cm^2)\tJ_0_r\tERE(%%)\n\n');
+for m=1:nofcells
+	fprintf(fid,'%s\t%.4g\t%g\t%g\t%g\t%g\n',names{1,m},datacell{1,m},results{3,m},results{1,m},results{2,m},results{4,m});
+endfor
+# Close file, save data
 fclose(fid);
-
-
-xmin=min(wave);
-xmax=max(wave);
-ymin=0;
-ymax=1.1*max(max(lum));
-plot(longwave*10^9,lum);
-axis([xmin,xmax,ymin,ymax]);
-xlabel "Wavelength (nm)"
-ylabel "Calculated spectral luminescence (A/m^2)"
-legend(names,"location","northwest")
-
-print(gen_pname(names,'_lum','.png'),'-dpng');
-print(gen_pname(names,'_lum','.eps'),'-deps');
-clf;
