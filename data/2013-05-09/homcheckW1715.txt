@@ -1,0 +1,11 @@
+homogenity check W1715
+normalise eqe as:
+Eqe in spot a divided by mean of eqe-spot-A/eqe-qe-spot
+mean A/q : 0.9715 std : 0.010099
+mean f/q : 0.9283 std : 0.016008
+
+	A	f	qe
+Jsc	29.446	31.720	29.360
+J0r	1.5550	1.6751	1.5595 (e-17)
+Voclim	1.0880	1.0880	1.0878
+
