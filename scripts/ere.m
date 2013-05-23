@@ -43,14 +43,16 @@ endfor
 
 ############## do the calculations		##################
 #create cell to contain results: {1,1}=J_sc; 
-#{2,1}=J_0_r; {3,1}=Voc_limit; {4,1}=ERE
-results=cell(4,nofcells);
+#{2,1}=J_0_r; {3,1}=Voc_limit; {4,1}=ERE; {5,:}=lum
+results=cell(5,nofcells);
 
 for m=1:nofcells
 	results{1,m}=q*trapz(datacell{2,m}*10^9,datacell{6,m} .* datacell{3,m}) / 10 ;	
 	results{2,m}=q*trapz(datacell{4,m}, blackbodyE(datacell{4,m},Troom) .* datacell{5,m} ) / 10 ;
 	results{3,m}=k*Troom/q * log( results{1,m}/results{2,m} +1 ) ;
 	results{4,m}=exp( q * datacell{1,m} / (k*Troom) ) * results{2,m} / results{1,m} * 100;
+	results{5,m}=q*exp(q*results{3,m}/(k*Troom)-1) * blackbodyE(datacell{4,m},Troom) .* flipud(datacell{3,m}) /10;
+	#this one goes wrong because of energy vs nm!
 endfor
 ############## done the calculations		##################
 
