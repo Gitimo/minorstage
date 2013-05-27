@@ -1,0 +1,7 @@
+used linear interpolation of IQE data for wavelength 820 to 890 nm
+that is near band edge since 1.43eV -> 867nm
+at L=1.2497e-6 m which should be comparable to W, neither << nor >> ?!?
+
+Wiqe=0.132mm
+Intercp=1.6644
+product=2.1972e-4
