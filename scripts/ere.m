@@ -23,10 +23,13 @@ names=cellstr('');
 #{3,:}=eqe; {4,:}=energy; {5,:}=eqeflipped; {6,:}=numberofphotons
 datacell=cell(6,nofcells);
 
+detectionlimit=1.5360e-03;
+
 for m=1:nofcells
 	names{1,m}=input("Path to cell-eqe Data? ","s");
 	datacell{1,m}=input("Voc? (V) ");
 	data=dlmread(names{1,m});
+	data(find(data(:,2)<=detectionlimit),2)=0; #set all EQEs below detection limit to zero
 	datacell{2,m}=data(:,1)*10^(-9);
 	datacell{3,m}=data(:,2);
 	datacell{4,m}=wavetoen(flipud(datacell{2,m}));		
