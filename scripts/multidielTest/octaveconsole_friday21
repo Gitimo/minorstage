@@ -1,0 +1,50 @@
+octave:2> Ag=dlmread('refindAg.txt')
+octave:3> Au=dlmread('refindAu.txt');
+octave:4> GaAs=dlmread('refindGaAs.txt');
+octave:5> AlGaAs=dlmread('refindAlGaAs.txt');
+octave:6> size(Ag)
+ans =
+
+   38    3
+
+octave:7> Ag(:,1)=Ag(:,1)*1000;
+octave:8> Au(:,1)=Au(:,1)*1000;
+octave:9> wave=linspace(350,1000,301);
+octave:10> Ag
+octave:11> nAg=interp1(Ag(:,1),Ag(:,2),wave);
+octave:12> nAu=interp1(Ag(:,1),Au(:,2),wave);
+error: A(I): Index exceeds matrix dimension.
+error: called from:
+error:   /usr/share/octave/3.2.4/m/general/interp1.m at line 208, column 19
+octave:12> nAu=interp1(Au(:,1),Au(:,2),wave);
+octave:13> size(wave)
+ans =
+
+     1   301
+
+octave:14> size(nAg)
+ans =
+
+     1   301
+
+octave:15> for m=1:301
+> Gag(m)=abs(multidiel([1,[^C))^2;
+
+octave:15> kAu=interp1(Au(:,1),Au(:,3),wave);
+octave:16> kAg=interp1(Ag(:,1),Ag(:,3),wave);
+octave:17> for m=1:301
+> rAg(m)=abs(multidiel([1,nAg(m)+i*kAg(m)],[],wave(m)))^2;
+> end
+octave:18> plot(wave,rAg)
+octave:19> for m=1:301
+> rAu(m)=abs(multidiel([1,nAu(m)+i*kAu(m)],[],wave(m)))^2;
+> end
+octave:20> plot(wave,rAg,wave,rAu,'rx')
+octave:21> axis([0,1,350,1000])
+octave:22> axis([350,1000,0,1])
+octave:23> axis([350,1000,0.3,1])
+octave:24> xlabel 'wavelength (nm)'
+octave:25> ylabel 'Reflectance'
+octave:26> print -dpng silvervsgold.png
+octave:27> print -deps silvervsgold.eps
+
