@@ -1,0 +1,10 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[hmargin=3cm,vmargin=4cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{alltt}
+\usepackage{upgreek}
