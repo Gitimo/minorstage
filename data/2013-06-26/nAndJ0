@@ -1,0 +1,23 @@
+Calculate n and J0 values
+
+octave:98> [n,J0]=jscvoc(ca,CA)
+n =  1.9347
+J0 =  3.4006e-08
+octave:99> [n,J0]=jscvoc(cb,CB)
+n =  1.6846
+J0 =  1.1387e-09
+octave:100> [n,J0]=jscvoc(cc,CC)
+n =  1.7122
+J0 =  2.6576e-09
+octave:101> [n,J0]=jscvoc(cd,CD)
+n =  1.7478
+J0 =  4.6661e-09
+octave:102> [n,J0]=jscvoc(ce,CE)
+n =  1.8626
+J0 =  1.4502e-08
+octave:103> [n,J0]=jscvoc(cf,CF)
+n =  1.7789
+J0 =  3.3800e-09
+octave:104> [n,J0]=jscvoc(cg,CG)
+n =  1.6100
+J0 =  2.5101e-10

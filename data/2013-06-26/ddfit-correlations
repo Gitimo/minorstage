@@ -1,0 +1,37 @@
+Do the dark currents correlate with area (a) or perimeter (p)?
+
+octave:162> [b,r]=linfit(a,J01)
+b =
+  -4.7779e-17   4.7463e-17
+r =  0.64991
+octave:163> [b,r]=linfit(a,J02)
+b =
+  -3.3779e-08   4.9721e-08
+r =  0.88406
+octave:164> [b,r]=linfit(p,J01)
+b =
+  -2.3892e-17   9.5226e-17
+r =  0.65226
+octave:165> [b,r]=linfit(p,J02)
+b =
+  -1.6858e-08   8.3393e-08
+r =  0.88384
+
+How about the ratios?
+
+octave:166> [b,r]=linfit(a./p,J01)
+b =
+  -2.3450e-16   5.9204e-17
+r =  0.77440
+octave:167> [b,r]=linfit(a./p,J02)
+b =
+  -1.4749e-07   5.5391e-08
+r =  0.83373
+octave:168> [b,r]=linfit(p./a,J01)
+b =
+   4.1175e-18  -1.0852e-17
+r =  0.95267
+octave:169> [b,r]=linfit(p./a,J02)
+b =
+   2.0266e-09   1.6298e-08
+r =  0.62813

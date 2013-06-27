@@ -17,14 +17,14 @@ end
 fspec=load("am15full");
 fspec=fspec(:,[1,3]);
 
-fid=fopen('VOC');
+fid=fopen('VOC.txt');
 Voc=fscanf(fid,'%f\n');
 fclose(fid);
-fid=fopen('A');
+fid=fopen('A.txt');
 A=fscanf(fid,'%f\n');
 fclose(fid);
-P=fopen('P');
-Voc=fscanf(fid,'%f\n');
+fid=fopen('P.txt');
+P=fscanf(fid,'%f\n');
 fclose(fid);
 R=P./A;
 
@@ -73,9 +73,9 @@ endfor
 
 ############## print human readable output	##################
 [fid,msg]=fopen(gen_pname(names,'','.txt'),'w');
-fprintf(fid,'cell\t\tArea\tPerimeter\tRatio\tVoc(V)\t\tVlim(V)\tJ_sc(mA/cm^2)\tJ_0_r\tERE(%%)\n\n');
+fprintf(fid,'cell\t\t\tArea\tPerimeter\tRatio\tVoc\t\tVlim\tJ_sc\tJ_0_r\tERE(%%)\n\n');
 for m=1:nofcells
-	fprintf(fid,'%s\t\t%.3g\t%.3g\t%.3g\t%.4g\t\t%g\t%g\t%g\t%g\n',names{1,m},A(m),P(m),R(m),datacell{1,m},results{3,m},results{1,m},results{2,m},results{4,m});
+	fprintf(fid,'%s\t\t\t%.3g\t%.3g\t%.3g\t%.4g\t\t%g\t%g\t%g\t%g\n',names{1,m},A(m),P(m),R(m),datacell{1,m},results{3,m},results{1,m},results{2,m},results{4,m});
 endfor
 # Close file, save data
 fclose(fid);

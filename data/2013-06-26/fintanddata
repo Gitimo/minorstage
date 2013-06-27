@@ -1,0 +1,3 @@
+Function used for Linear fit to Data Comparison
+
+J(V)=J_sc - J0 *exp(qV/nkT)

@@ -1,0 +1,20 @@
+octave:201> linfit(a,n)
+ans =
+  -0.38160   1.96133
+octave:202> [b,r]=linfit(a,n)
+b =
+  -0.38160   1.96133
+r =  0.25798
+octave:203> [b,r]=linfit(p,n)
+b =
+  -0.19080   2.34295
+r =  0.25800
+octave:204> [b,r]=linfit(a./p,n)
+b =
+  -1.7728   2.0317
+r =  0.28343
+octave:205> [b,r]=linfit(p./a,n)
+b =
+   0.031427   1.469233
+r =  0.44289
+
