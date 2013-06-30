@@ -1,4 +1,4 @@
-function [p,Rsq]=linfit(X,Y)
+function [p,Rsq]=fit_lin(X,Y)
 #Compute linear fit and R² of the same
 	p=polyfit(X,Y,1);
 	yfit=polyval(p,X);

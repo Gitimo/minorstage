@@ -1,10 +1,12 @@
 ############## Define some physical constants 	##################
-global k=1.3806488e-23;
-global q=1.60217646e-19;
-global h=6.62606957e-34;
-global c=299792458;
-global Troom=300;
-global Tsun=5777;
+pkg load physicalconstants;
+global k q h c Troom Tsun;
+	Troom=293;
+	Tsun=5777;
+	k=physical_constant("Boltzmann constant");
+	q=physical_constant("elementary charge");
+	h=physical_constant("Planck constant");
+	c=physical_constant("speed of light in vacuum");
 ############## Defined some physical constants	#################
 
 # utility functions
