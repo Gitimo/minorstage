@@ -1,4 +1,4 @@
-function [y] = fit_dd_res (Jm,V,par)
+function [y] = fit_dd_res (par,Jm,V)
 # ddresfit is a function used to convert a measured I-V curve into a set off
 # nonlinear equations according to the double-diode model. 
 # It will be used in a call-by-handle to fsolve to minimise this set.

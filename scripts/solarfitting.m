@@ -1,11 +1,13 @@
 function [ddres_J]=solarfitting(Jscm,Vocm,fullJV)
 ############## Define some physical constants 	##################
-	pkg load physicalconstants;
+	#pkg load physicalconstants;
 	global k T q;	
 	T=298;
-	k=physical_constant("Boltzmann constant");
-	q=physical_constant("elementary charge");
-	pkg unload physicalconstants;
+	q=1.602176487e-19;
+	k=1.3806504e-23;	
+	#k=physical_constant("Boltzmann constant");
+	#q=physical_constant("elementary charge");
+	#pkg unload physicalconstants;
 ############## Defined some physical constants	#################
 
 	Jsc=max(Jscm);
@@ -47,13 +49,21 @@ function [ddres_J]=solarfitting(Jscm,Vocm,fullJV)
 ############## initial, non-linear ddres-fit of full JV data ########
 	#check for full JV-data
 	if !isempty (fullJV)
-		fullV=fullJV(:,1);
-		fullJ=fullJV(:,2);
+		V=fullJV(:,1);
+		Jm=fullJV(:,2);
 		guess=sqrt([dd_J01,dd_J02,1,10000,Jsc]);
-		[par,retJ,solverinfo]=fsolve(@(x) fit_dd_res(fullJ,fullV,x),guess,...
-					optimset("FunValCheck","on","TolX",1e-5));
-		[par,retJ,solverinfo]=fsolve(@(x) fit_dd_res(fullJ,fullV,x),par,...
-					optimset("FunValCheck","on","TolX",1e-5));
+		[par,retJ,solverinfo]=fminunc (@(par)((par(5)^2)
+          -(par(1)^2)*(exp(q*(V-Jm*(par(3)^2))/(  k*T))-1) 
+          -(par(2)^2)*(exp(q*(V-Jm*(par(3)^2))/(2*k*T))-1) 
+          -(V+Jm*(par(3)^2))/(par(4)^2) 
+          -Jm),guess,...
+					optimset("FunValCheck","off","TolX",1e-5));
+		[p,retJ,solverinfo]=fminunc (@(par)((par(5)^2)
+          -(par(1)^2)*(exp(q*(V-Jm*(par(3)^2))/(  k*T))-1) 
+          -(par(2)^2)*(exp(q*(V-Jm*(par(3)^2))/(2*k*T))-1) 
+          -(V+Jm*(par(3)^2))/(par(4)^2) 
+          -Jm),p,...
+					optimset("FunValCheck","off","TolX",1e-5));
 
 		ddres_J01=par(1)^2; ddres_J02=par(2)^2; ddres_Rs=par(3)^2; ddres_Rsh=par(4)^2; 
 		ddres_Jsc=par(5)^2; ddres_J=retJ+fullJ;		
