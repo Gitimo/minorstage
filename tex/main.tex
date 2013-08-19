@@ -1,0 +1,30 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage[hmargin=3cm,vmargin=4cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{alltt}
+\usepackage{upgreek}
+
+\parindent0mm
+
+%Defining commands and environments
+\newcommand{\threefive}{III-V}
+\newcommand{\gaas}{GaAs}
+\newcommand{\rseries}{R_s}
+\newcommand{\rshunt}{R_sh}
+
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\abbrev}[1]{(\emph{#1})}
+\begin{document}
+\section{Theory}
+	\input{theory.tex}
+\section{Methods}
+	\input{methods.tex}
+\end{document}

@@ -1,29 +1,5 @@
-\documentclass[a4paper]{article}
-
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-\usepackage[hmargin=3cm,vmargin=4cm]{geometry}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{microtype}
-\usepackage{color}
-\usepackage{alltt}
-\usepackage{upgreek}
-
-\parindent0mm
-
-\newcommand{\beq}{\begin{equation}}
-\newcommand{\eeq}{\end{equation}}
-\begin{document}
-
-\section{Theory}
-
-\subsection{Light absorption and carrier creation in GaAs solar cells}
-
-
-\subsection{Carrier recombination in GaAs solar cells}
-Once an electron-hole pair has been created by the absorption of a photon, there are two major possibilities for its development: either the pair is successfully separated by the junction, traverses the external circuit and is active in providing energy, or the electron-hole pair can recombine. Recombination can either be radiative or non-radiative. In radiative recombination, a photon of corresponding energy is released, whereas in non-radiative recombination, either a phonon is released (Shockley-Read-Hall recombination) or the excess energy is passed on to a third carrier (Auger recombination).
+\subsection{Carrier recombination in \gaas solar cells}
+Once an electron-hole pair has been created by the absorption of a photon, there are two major possibilities for its development: either the pair is successfully separated by the junction, traverses an external circuit and is active in providing energy, or the electron-hole pair can recombine. Recombination can either be radiative or non-radiative. In radiative recombination, a photon of corresponding energy is released, whereas in non-radiative recombination, either a phonon is released (Shockley-Read-Hall recombination) or the excess energy is passed on to a third carrier (Auger recombination).
 \begin{itemize}
 \item Charge collection
 \item Recombination
@@ -31,12 +7,46 @@ Once an electron-hole pair has been created by the absorption of a photon, there
 	\item Radiative Recombination
 	\item Non-Radiative Recombination
 		\begin{itemize}
-		\item Shockley-Read-Hall recombination
+		\item Shockley-Read-Hall \abbrev{SRH} recombination
 		\item Auger recombination
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
-In solar cells, non-radiative recombination is an unwanted phenomenon since it constitutes loss of generated carriers and thus loss of energy. Auger recombination is a minor issue: it is a three body collision process and thus intrinsically improbable to happen. Non-radiative recombination at trap-states within the energy-gap is, however, still a major concern. Such trap-states can be created either by impurities or imperfections in the crystal lattice. With current high-quality GaAs growth techniques, impurities are of less concern than imperfections, especially when one realises that every crystal surface constitutes such an imperfection. The `ideal', `perfect' crystal is a purely theoretical construct, it's translation symmetry is never broken, it is infinite. To avoid loss of energy through recombination at the back side of the solar cell, a back surface field is induced in the material. It is an electrical field which `pushes' the carriers away from the surfaces, back into the bulk.
+In solar cells, non-radiative recombination is an unwanted phenomenon since it constitutes loss of generated carriers and thus loss of energy. Auger recombination is a minor issue in \threefive solar cells: it is a three body collision process and thus intrinsically improbable to happen. Non-radiative recombination at trap-states within the energy-gap is, however, still a major concern. Such trap-states can be created by imperfections in the crystal lattice, crystal-defects or impurities. With current high-quality \gaas growth techniques, impurities are of less concern than imperfections.
+An `ideal' crystal is a purely theoretical construct: its translation symmetry is never broken, thus the `ideal' crystal has to be infinite. Consequently, in a real crystal, even in a perfectly pure one, surfaces constitute imperfections since the crystal symmetries are broken here.
+To avoid loss of energy through recombination at the back side of the solar cell, a so called `back surface field' \abbrev{BSF} can be included in the cell during growth. It induces an electrical field to `push' minority carriers away from the surface, back into the bulk again. Similar strategies exist for the front surface.
+
+\subsection{Solar-cell models}
+Solar-cells are electrical devices which transfer photonic energy to electrical energy. Several different kinds of solar cells exist today. The type of interest for this research is the inorganic, \threefive \gaas solar cell.
+The \gaas solar cell can be thought of as a p-n diode, an electrical device based on the p-n junction, the current-volatge behaviour of which is described by the Shockley-Diode-Equation. Using a set of assumptions and the continuity equations, one readily arrives at a simple formula for the current(-density) across a p-n-junction in the simplest case: %Marti1997
+\beq
+	J = J_L - J_0 (e^{qV/kT}-1) \, .
+\eeq
+The light current of the solar cell, $J_L$, is taken to be its short-circuit current $J_{sc}$, the two terms will be used synonymously.
+\subsubsection{Resitances}
+A more realistic approach to modeling solar cells will take into account that currents flowing through the cell encounter physical resistance. This results in a series-resistance $\rseries$ of a solar cell. It is also possible for (part of) the current to bypass the cell, an effect which can be captured by a shunt-resistance, $R_{sh}$. Taking these resistances into account leads to:
+\beq
+	J = J_L - J_0 (e^{q(V+J\rseries)/kT}-1) - \frac{V-J\rseries}{\rshunt}\, .
+\eeq
+The above equation cannot readily be solved analytically.
+\subsubsection{Recombination}
+As discussed above, there are non-radiative recombination mechanisms in solar cells, which can lead to energy loss across the diode. This phonomenon can be included in the solar cell model by including a `diode-ideality' factor $n$, which is simply included in the exponent's denominator. It can also be shown that each recombination mechanism discussed above is connected with a specific value for $n$:
+\begin{itemize}
+\item[n=1] radiative recombination
+\item[n=$frac{3}{2}$] Auger recombination
+\item[n=2] SRH recombination
+\end{itemize}
+Since Auger recombination is of little importance for \gaas solar cells, inclusion of recombination typically leads to the `Double Diode' model of solar cells:
+\beq
+	J = J_L - J_{01} (e^{q(V+J\rseries)/kT}-1) - J_{02} (e^{q(V+J\rseries)/2kT}-1) - \frac{V-J\rseries}{\rshunt}\, .
+\eeq
+A quasi-analytical solution for the open-circuit voltage in the above equation can be derived under the assumption of infinite shunt-resistance. Under open-circuit conditions, no current flows. :
+
+
+\subsection{Side-surfaces}
+Because solar-cells are grown layer by layer parrallel to the front and back surface, each individual layer being homogenous, it is not possible to employ a strategy similar to the BSF to avoid carrier recombination at the side surfaces of solar cells.
+As a rough estimate, a typical \gaas solar cell grown in the laboratory for research purposes has sides on the order of centi-meters and thickness on the order of micro-meters. Thus, a cell's side-surface is $\sim \frac{1}{10000}$ the size of its front or back surface. Whatever the precise dimensions may be, the side-surfaces are much smaller than front- and back surfaces, still research has shown that their influence on dark-currents in the cell is of great importance.
+
 
 \subsection{Rau's reciprocity relation}
 In 2007, Rau published a paper with interesting reciprocity relations relating electrical properties of a solar cell to optical properties of the same device operated as a LED. It will become clear that from a simple, standardised measurement of the external-quantum-efficiency (\emph{EQE}) of a solar cell, a wealth of information can be gained. A mathematically rigorous derivation is provided by Rau, relying on a more fundamental theorem by Donolato. However, in the following, we will chose an intuitive approach to obtain the same results because they implications of the formul\ae thus derived will become clear more easily. The interested reader is referred to the original publication for the more mathematical approach.\\
@@ -72,23 +82,23 @@ which means that in thermal equilibrium, each surface element of a solar cell is
 				&\approx \frac{2 E_{\lambda} ^2 \, \cos (\theta)}{h^3 \, c^2} \exp (\frac{-E_{\lambda}}{kT}) \, ,
 \end{align}
 where $E_{\lambda}$ is the energy of photons of wavelength $\lambda$. The last approximation can be used to obtain analytical solutions if all spectra are taken as black-body radiation functions. However, since it is more common in the field of solar cells to use the AM1.5 reference spectrum, we will use the exact formulation and obtain numerical results.\\
-A portion $\alpha (r_S, \theta, \upvarphi, E_{\lambda})$ of that radiation will be absorbed by the solar cell, depending on the coordinate $r_S$ of the surface element $dS$ of the cell and the angles of incidence $\theta$ \& $\upvarphi$. Accordingly, the probability that one photon impinging on the cell will contribute one elementary charge $q$ to the short-circuit current of the cell will be given by $Q(r_S, \theta, \upvarphi, E_{\lambda})=\alpha F_C$, where $F_C$ is the probability for a charge carrier to be collected by the junction~\footnote{in the field of photo-voltaics, the quantity $Q$ is known as the external-quantum-efficiency of a solar cell}. Thus, from thermal radiation, there will be a short-circuit current component
+A portion $\alpha (\rseries, \theta, \upvarphi, E_{\lambda})$ of that radiation will be absorbed by the solar cell, depending on the coordinate $\rseries$ of the surface element $dS$ of the cell and the angles of incidence $\theta$ \& $\upvarphi$. Accordingly, the probability that one photon impinging on the cell will contribute one elementary charge $q$ to the short-circuit current of the cell will be given by $Q(\rseries, \theta, \upvarphi, E_{\lambda})=\alpha F_C$, where $F_C$ is the probability for a charge carrier to be collected by the junction~\footnote{in the field of photo-voltaics, the quantity $Q$ is known as the external-quantum-efficiency of a solar cell}. Thus, from thermal radiation, there will be a short-circuit current component
 \begin{equation}
-J_{SC,0}=q \int _{\Omega _{c}} \int _{E_{\lambda}} \int _{S_C} Q(r_S, \theta, \upvarphi, E_{\lambda}) \phi_{eq} (\theta, E_{\lambda}) d\Omega dE_{\lambda}dS \, ,
+J_{SC,0}=q \int _{\Omega _{c}} \int _{E_{\lambda}} \int _{S_C} Q(\rseries, \theta, \upvarphi, E_{\lambda}) \phi_{eq} (\theta, E_{\lambda}) d\Omega dE_{\lambda}dS \, ,
 \end{equation}
-which will be called the dark-equilibrium-short-circuit current. The integral extends over the full spherical angle $\Omega _{c} = 2\pi$. 
-Because of thermal equilibrium, no net current will be flowing, so we can postulate that $J_{SC,0}$ will be counterbalanced by an equilibrium injection current $J_{em,0}=J_{SC,0}$ for which the relation 
+which will be called the dark-equilibrium-short-circuit current. The integral extends over the full spherical angle $\Omega _{c} = 2\pi$.
+Because of thermal equilibrium, no net current will be flowing, so we can postulate that $J_{SC,0}$ will be counterbalanced by an equilibrium injection current $J_{em,0}=J_{SC,0}$ for which the relation
 \begin{equation}
 \updelta J_{em,0}=\updelta J_{SC,0} = q Q \phi_{eq}
 \end{equation}
 also holds throughout the entire cell. Thus, it can be seen that in thermal equilibrium, light injection with \emph{subsequent carrier collection} is precisely counter-balanced by current injection with \emph{subsequent light emission}.\\
 However, under illumination from the sun, an excess flux density $\phi_{sun}$ impinges on the cell, so the short-circuit current will be given by
 \begin{equation}
-J_{SC}=q \int _{\Omega _{sun}} \int _{E_{\lambda}} \int _{S_C} Q(r_S, \theta, \upvarphi, E_{\lambda}) \phi_{sun} (\theta , \upvarphi , E_{\lambda}) d\Omega dE_{\lambda}dS \, .
+J_{SC}=q \int _{\Omega _{sun}} \int _{E_{\lambda}} \int _{S_C} Q(\rseries, \theta, \upvarphi, E_{\lambda}) \phi_{sun} (\theta , \upvarphi , E_{\lambda}) d\Omega dE_{\lambda}dS \, .
 \end{equation}
 Rau proceeded to postulate that the injection current $\updelta J_{em}$ under an applied bias voltage would follow an exponential law and that it were superimposed on the dark-equilibrium-short-circuit current, so that the excess photon flux density $\phi_{em}$ emitted from the device would follow Shockley's diode law:
 \begin{equation}
-\phi_{em}(r_S, \theta, \upvarphi, E_{\lambda})=Q(r_S, \theta, \upvarphi, E_{\lambda}) \phi_{eq} (\theta, E_{\lambda}) (\exp (\frac{qV}{kT})-1) \, .
+\phi_{em}(\rseries, \theta, \upvarphi, E_{\lambda})=Q(\rseries, \theta, \upvarphi, E_{\lambda}) \phi_{eq} (\theta, E_{\lambda}) (\exp (\frac{qV}{kT})-1) \, .
 \end{equation}
 Thus, from a known $Q$ -- i.e. \emph{EQE} -- the spectral and angular emmittance of the device if operated as a LED can be calculated. The derivation is strictly valid only for angular \emph{EQE} measurements, but Green has shown that deviations from the exact results are small enough to allow an approximation of the method by measuring just the perpendicular component of the \emph{EQE}.\\
 Furthermore, through the relation $V_{OC}=kT/q \ln (J_{SC}/J_0 +1)$ we can calculate a maximum attainable open-circuit voltage for a given device, once we realise that the minimum recombination current will be given by the equilibrium injection current:
@@ -97,5 +107,3 @@ Furthermore, through the relation $V_{OC}=kT/q \ln (J_{SC}/J_0 +1)$ we can calcu
 V_{OC}^{rad}=\frac{kT}{q} \ln (\frac{J_{SC}}{J_{em,0}}+1) \, .
 \end{equation}
 This maximum open circuit voltage is in a sense more realistic than Shockley and Queisser's limit in that it takes into account the devices actual quantum efficiency and does not model the absorption as a step function $\alpha(E_{\lambda})=1$ for $E_{\lambda}>E_g$ and  $\alpha(E_{\lambda})=0$  for $E<E_g$. Equation \eqref{eq:vocrad} can be seen as the most important result of this derivation, since it will allow us to compare the performance of solar cells based on their maximum attainable open-circuit voltage, \emph{the} parameter which has to be improved upon to achieve another world-record solar cell at \emph{AMS}.
-
-\end{document}
